@@ -7,7 +7,10 @@ namespace Template.Data.EntityFrameworkCore;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
+    {
+        Database.EnsureCreated();
+    }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
