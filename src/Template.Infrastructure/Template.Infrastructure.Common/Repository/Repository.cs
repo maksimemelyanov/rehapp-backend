@@ -6,69 +6,71 @@ namespace Template.Infrastructure.Common.Repository;
 
 public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IIdentified, new()
 {
-    private readonly DbContext _context;
+    private readonly DbContext context;
 
     public Repository(DbContext context)
     {
-        _context = context;
+        this.context = context;
     }
 
-    public abstract Task<TEntity?> FindByIdAsync(Guid id, CancellationToken cancellationToken);
+    public abstract Task<TEntity?> FindByIdAsync(Guid id, bool isTracked = true, CancellationToken cancellationToken = default);
 
-    public abstract Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken);
+    public abstract Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> selector, bool isTracked = true, CancellationToken cancellationToken = default);
 
     public virtual IQueryable<TEntity> All()
     {
-        return _context.Set<TEntity>();
+        return context.Set<TEntity>();
     }
 
-    public virtual async Task<List<TEntity>> AllAsync(CancellationToken cancellationToken)
+    public virtual async Task<List<TEntity>> AllAsync(bool isTracked = true, CancellationToken cancellationToken = default)
     {
-        return await _context.Set<TEntity>().ToListAsync(cancellationToken);
+        IQueryable<TEntity> query = context.Set<TEntity>();
+        if (!isTracked) query = query.AsNoTracking();
+        return await query.ToListAsync(cancellationToken);
     }
 
-    public virtual async Task AddAsync(TEntity entity, CancellationToken cancellationToken)
+    public virtual async Task AddAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
-        await _context.Set<TEntity>().AddAsync(entity, cancellationToken);
+        await context.Set<TEntity>().AddAsync(entity, cancellationToken);
     }
 
-    public virtual async Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken)
+    public virtual async Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
     {
-        await _context.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
+        await context.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
     }
 
-    public virtual async Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken)
+    public virtual async Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> selector, CancellationToken cancellationToken = default)
     {
-        return await _context.Set<TEntity>().AnyAsync(selector, cancellationToken);
+        return await context.Set<TEntity>().AsNoTracking().AnyAsync(selector, cancellationToken);
     }
 
     public virtual void Remove(TEntity entity)
     {
-        _context.Set<TEntity>().Remove(entity);
+        context.Set<TEntity>().Remove(entity);
     }
 
     public virtual void RemoveRange(IEnumerable<TEntity> entities)
     {
-        _context.Set<TEntity>().RemoveRange(entities);
+        context.Set<TEntity>().RemoveRange(entities);
     }
 
     public virtual void Update(TEntity entity)
     {
-        _context.Set<TEntity>().Update(entity);
+        context.Set<TEntity>().Update(entity);
     }
 
-    public async Task SaveChangesAsync(CancellationToken cancellationToken)
+    public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        await _context.SaveChangesAsync(cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
     }
 
-    public virtual async Task<int> CountAsync(CancellationToken cancellationToken)
+    public virtual async Task<int> CountAsync(CancellationToken cancellationToken = default)
     {
-        return await _context.Set<TEntity>().CountAsync(cancellationToken);
+        return await context.Set<TEntity>().AsNoTracking().CountAsync(cancellationToken);
     }
 
-    public virtual async Task<int> CountAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken)
+    public virtual async Task<int> CountAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default)
     {
-        return await _context.Set<TEntity>().Where(filter).CountAsync(cancellationToken);
+        return await context.Set<TEntity>().AsNoTracking().Where(filter).CountAsync(cancellationToken);
     }
 }
