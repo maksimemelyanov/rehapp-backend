@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
-using System.Text;
 using RehApp.Infrastructure.Common.AppDefinition;
 using RehApp.Infrastructure.Common.Attributes;
 using RehApp.Infrastructure.Common.Models;
+using System.Text;
 
 namespace RehApp.Application.Definitions;
 
@@ -50,7 +50,17 @@ public class AuthDefinition : AppDefinition
 
                     return IdentityConstants.ApplicationScheme;
                 };
-            }); ;
+            })
+            .AddYandex(options =>
+            {
+                options.ClientId = configuration["Authentication:Yandex:ClientId"]!;
+                options.ClientSecret = configuration["Authentication:Yandex:ClientSecret"]!;
+            })
+            .AddVkontakte(options =>
+            {
+                options.ClientId = configuration["Authentication:Vkontakte:ClientId"]!;
+                options.ClientSecret = configuration["Authentication:Vkontakte:ClientSecret"]!;
+            });
 
         services.AddAuthorization(options =>
         {

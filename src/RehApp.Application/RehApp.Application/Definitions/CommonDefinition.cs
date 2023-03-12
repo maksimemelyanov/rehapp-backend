@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json.Serialization;
 using RehApp.Infrastructure.Common.AppDefinition;
 using RehApp.Infrastructure.Common.Attributes;
+using System.Text.Json.Serialization;
 
 namespace RehApp.Application.Definitions;
 

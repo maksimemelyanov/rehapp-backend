@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using RehApp.Domain.RelationalDatabase.Entities;
+using System.Security.Claims;
 
 namespace RehApp.Data.EntityFrameworkCore;
 
@@ -32,5 +33,6 @@ public static class DatabaseInitializer
         };
 
         userManager.CreateAsync(user, "qwerty123").Wait();
+        userManager.AddClaimAsync(user, new Claim("Id", user.Id.ToString())).Wait();
     }
 }

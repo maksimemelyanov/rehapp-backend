@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
-using Serilog;
-using System.Text.Json;
 using RehApp.Infrastructure.Common.AppDefinition;
 using RehApp.Infrastructure.Common.Attributes;
 using RehApp.Infrastructure.Common.Models;
+using Serilog;
+using System.Text.Json;
 
 namespace RehApp.Application.Definitions;
 

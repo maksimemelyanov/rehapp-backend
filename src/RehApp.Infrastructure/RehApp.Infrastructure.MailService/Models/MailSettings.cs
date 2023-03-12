@@ -1,5 +1,4 @@
 ﻿using MailKit.Security;
-using System;
 
 namespace RehApp.Infrastructure.MailService.Models;
 

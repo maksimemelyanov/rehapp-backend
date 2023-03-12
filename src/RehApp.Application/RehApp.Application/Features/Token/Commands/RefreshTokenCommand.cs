@@ -1,14 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
 using RehApp.Domain.RelationalDatabase.Entities;
 using RehApp.Infrastructure.Common;
 using RehApp.Infrastructure.Common.Exceptions;
 using RehApp.Infrastructure.Common.Extensions;
 using RehApp.Infrastructure.Common.Helpers;
 using RehApp.Infrastructure.Common.Models;
+using System.ComponentModel.DataAnnotations;
 using Models = RehApp.Infrastructure.Common.Models;
 
 namespace RehApp.Application.Features.Token.Commands;
@@ -54,7 +53,7 @@ public class RefreshTokenCommandHandler :
 
         if (principal is null) return response.Failure(Exceptions.InvalidRefreshTokenData);
 
-        if (!Guid.TryParse(principal!.FindFirst(ClaimTypes.NameIdentifier)?.Value, out var id))
+        if (!Guid.TryParse(principal!.FindFirst("Id")?.Value, out var id))
         {
             return response.Failure(Exceptions.FailedToIdentifyUser);
         }

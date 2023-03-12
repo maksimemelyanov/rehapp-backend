@@ -152,7 +152,7 @@ namespace RehApp.Data.EntityFrameworkCore.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Template.Domain.RelationalDatabase.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("RehApp.Domain.RelationalDatabase.Entities.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -223,6 +223,29 @@ namespace RehApp.Data.EntityFrameworkCore.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("RehApp.Domain.RelationalDatabase.Entities.ExtAuthInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ApplicationUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ExternalId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Provider")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("ExtAuthInfo");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
@@ -234,7 +257,7 @@ namespace RehApp.Data.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Template.Domain.RelationalDatabase.Entities.ApplicationUser", null)
+                    b.HasOne("RehApp.Domain.RelationalDatabase.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -243,7 +266,7 @@ namespace RehApp.Data.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("Template.Domain.RelationalDatabase.Entities.ApplicationUser", null)
+                    b.HasOne("RehApp.Domain.RelationalDatabase.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -258,7 +281,7 @@ namespace RehApp.Data.EntityFrameworkCore.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Template.Domain.RelationalDatabase.Entities.ApplicationUser", null)
+                    b.HasOne("RehApp.Domain.RelationalDatabase.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -267,11 +290,23 @@ namespace RehApp.Data.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("Template.Domain.RelationalDatabase.Entities.ApplicationUser", null)
+                    b.HasOne("RehApp.Domain.RelationalDatabase.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("RehApp.Domain.RelationalDatabase.Entities.ExtAuthInfo", b =>
+                {
+                    b.HasOne("RehApp.Domain.RelationalDatabase.Entities.ApplicationUser", null)
+                        .WithMany("ExtAuthInfo")
+                        .HasForeignKey("ApplicationUserId");
+                });
+
+            modelBuilder.Entity("RehApp.Domain.RelationalDatabase.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("ExtAuthInfo");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using RehApp.Infrastructure.Common.Attributes;
+using System.Reflection;
 
 namespace RehApp.Infrastructure.Common.AppDefinition;
 

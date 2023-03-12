@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using RehApp.Infrastructure.Common.Extensions;
+﻿using RehApp.Infrastructure.Common.Extensions;
+using System.ComponentModel.DataAnnotations;
 
 namespace RehApp.Infrastructure.Common.Models;
 

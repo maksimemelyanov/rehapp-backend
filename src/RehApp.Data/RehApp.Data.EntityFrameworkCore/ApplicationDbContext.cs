@@ -9,7 +9,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
     {
-        Database.EnsureCreated();
+
     }
 
     protected override void OnModelCreating(ModelBuilder builder)

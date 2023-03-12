@@ -1,20 +1,23 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using RehApp.Domain.RelationalDatabase.Entities;
 using RehApp.Infrastructure.Common;
 using RehApp.Infrastructure.Common.Exceptions;
 using RehApp.Infrastructure.Common.Extensions;
 using RehApp.Infrastructure.Common.Helpers;
 using RehApp.Infrastructure.Common.Models;
+using System.ComponentModel.DataAnnotations;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Models = RehApp.Infrastructure.Common.Models;
 
 namespace RehApp.Application.Features.Token.Commands;
 
 public class CreateTokenRequest : IRequest<InternalResponse<Models.Token>>
 {
+    /// <summary>
+    /// In this field, you can specify the username or mailbox of the user
+    /// </summary>
     [Required]
     public string Login { get; set; } = null!;
 
@@ -60,7 +63,9 @@ public class CreateTokenCommandHandler
 
         var claims = new List<Claim>()
         {
-            new Claim(JwtRegisteredClaimNames.Sub, $"{user.Id}")
+            new Claim("Id", user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.Sub, $"{user.UserName}"),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
         var now = DateTime.UtcNow;

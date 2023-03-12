@@ -1,6 +1,6 @@
-using Serilog.Events;
-using Serilog;
 using RehApp.Infrastructure.Common.AppDefinition;
+using Serilog;
+using Serilog.Events;
 
 try
 {

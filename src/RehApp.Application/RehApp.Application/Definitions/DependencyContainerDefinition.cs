@@ -1,10 +1,10 @@
-﻿using System.Reflection;
-using RehApp.Data.EntityFrameworkCore;
+﻿using RehApp.Data.EntityFrameworkCore;
 using RehApp.Infrastructure.Common.AppDefinition;
 using RehApp.Infrastructure.Common.Attributes;
 using RehApp.Infrastructure.Common.Extensions;
 using RehApp.Infrastructure.MailService;
 using RehApp.Infrastructure.MailService.Models;
+using System.Reflection;
 
 namespace RehApp.Application.Definitions;
 

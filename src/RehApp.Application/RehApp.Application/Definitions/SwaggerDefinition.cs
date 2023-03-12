@@ -1,9 +1,9 @@
 ﻿using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerUI;
-using System.Reflection;
 using RehApp.Infrastructure.Common;
 using RehApp.Infrastructure.Common.AppDefinition;
 using RehApp.Infrastructure.Common.Attributes;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Reflection;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
 
 namespace RehApp.Application.Definitions;
@@ -34,7 +34,7 @@ public class SwaggerDefinition : AppDefinition
         app.UseSwagger();
         app.UseSwaggerUI(settings =>
         {
-            settings.DocumentTitle = $"{Constants.ServiceName}";
+            settings.DocumentTitle = $"{ServiceName}";
             settings.DefaultModelExpandDepth(0);
             settings.DefaultModelRendering(ModelRendering.Model);
             settings.DocExpansion(DocExpansion.None);

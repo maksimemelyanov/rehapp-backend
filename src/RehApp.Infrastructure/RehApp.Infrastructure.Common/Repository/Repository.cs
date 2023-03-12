@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 using RehApp.Infrastructure.Common.Interfaces;
+using System.Linq.Expressions;
 
 namespace RehApp.Infrastructure.Common.Repository;
 

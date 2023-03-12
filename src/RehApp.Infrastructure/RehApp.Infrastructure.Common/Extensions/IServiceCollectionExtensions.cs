@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using RehApp.Infrastructure.Common.Repository;
+using System.Reflection;
 
 namespace RehApp.Infrastructure.Common.Extensions;
 

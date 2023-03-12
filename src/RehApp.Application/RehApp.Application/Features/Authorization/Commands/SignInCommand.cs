@@ -1,16 +1,19 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
 using RehApp.Domain.RelationalDatabase.Entities;
 using RehApp.Infrastructure.Common;
 using RehApp.Infrastructure.Common.Exceptions;
 using RehApp.Infrastructure.Common.Extensions;
 using RehApp.Infrastructure.Common.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace RehApp.Application.Features.Authorization.Commands;
 
 public class SignInRequest : IRequest<InternalResponse>
 {
+    /// <summary>
+    /// In this field, you can specify the username or mailbox of the user
+    /// </summary>
     [Required]
     public string Login { get; set; } = null!;
 

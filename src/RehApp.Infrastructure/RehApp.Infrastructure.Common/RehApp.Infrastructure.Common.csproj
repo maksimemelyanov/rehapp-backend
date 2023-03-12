@@ -18,8 +18,4 @@
     <ProjectReference Include="..\RehApp.Infrastructure.MailService\RehApp.Infrastructure.MailService.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
-
 </Project>
