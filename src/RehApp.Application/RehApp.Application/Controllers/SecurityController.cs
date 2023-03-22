@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RehApp.Application.Features.Authorization.Commands;
+using RehApp.Application.Features.Auth.Commands;
 using RehApp.Application.Features.Token.Commands;
 using RehApp.Application.Features.User.Commands;
 using RehApp.Application.Features.User.Queries;
@@ -14,11 +14,11 @@ namespace RehApp.Application.Controllers;
 [ApiVersion("1.0")]
 [Tags("Security")]
 [Route("api/v{version:apiVersion}/security")]
-public class AuthorizationController : Controller
+public class SecurityController : Controller
 {
     private readonly IMediator mediator;
 
-    public AuthorizationController(IMediator mediator)
+    public SecurityController(IMediator mediator)
     {
         this.mediator = mediator;
     }

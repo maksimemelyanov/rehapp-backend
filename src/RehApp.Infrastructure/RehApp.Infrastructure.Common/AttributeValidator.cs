@@ -10,7 +10,7 @@ public static class AttributeValidator
 
         var errors = new List<ValidationResult>();
 
-        _ = !System.ComponentModel.DataAnnotations.Validator.TryValidateObject(
+        _ = !Validator.TryValidateObject(
             instance: value,
             validationContext: new ValidationContext(value),
             validationResults: errors,

@@ -11,13 +11,12 @@ using RehApp.Infrastructure.Common.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 
-namespace RehApp.Application.Features.Authorization.Commands;
+namespace RehApp.Application.Features.Auth.Commands;
 
 public class ConfigureAuthPropertiesRequest
 : IRequest<InternalResponse<AuthenticationProperties>>
 {
     [Required, IsEnumName(typeof(AuthProvider))]
-
     public string Provider { get; set; } = null!;
 
     [Required]

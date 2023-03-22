@@ -14,7 +14,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 
-namespace RehApp.Application.Features.Authorization.Commands;
+namespace RehApp.Application.Features.Auth.Commands;
 
 public class SignInUsingExternalProviderRequest : IRequest<InternalResponse<string>> 
 {

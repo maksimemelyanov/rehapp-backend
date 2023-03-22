@@ -7,7 +7,7 @@ using RehApp.Infrastructure.Common.Extensions;
 using RehApp.Infrastructure.Common.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace RehApp.Application.Features.Authorization.Commands;
+namespace RehApp.Application.Features.Auth.Commands;
 
 public class SignInRequest : IRequest<InternalResponse>
 {

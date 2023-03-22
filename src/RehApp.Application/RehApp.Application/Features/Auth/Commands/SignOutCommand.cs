@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using RehApp.Domain.RelationalDatabase.Entities;
 using RehApp.Infrastructure.Common.Models;
 
-namespace RehApp.Application.Features.Authorization.Commands;
+namespace RehApp.Application.Features.Auth.Commands;
 
 public class SignOutRequest : IRequest<InternalResponse>
 {
