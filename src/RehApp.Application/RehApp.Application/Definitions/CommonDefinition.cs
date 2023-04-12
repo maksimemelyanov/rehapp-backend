@@ -56,8 +56,17 @@ public class CommonDefinition : AppDefinition
         {
             ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
         });
-        app.UseHsts();
-        app.UseHttpsRedirection();
+
+        if (!env.IsDevelopment())
+        {
+            app.UseHsts();
+        }
+
+        if (!env.IsDevelopment() || env.EnvironmentName != "HTTP")
+        {
+            app.UseHttpsRedirection();
+        }
+
         app.MapDefaultControllerRoute();
         app.UseResponseCaching();
 

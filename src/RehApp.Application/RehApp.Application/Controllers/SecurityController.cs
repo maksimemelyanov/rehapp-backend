@@ -1,9 +1,7 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RehApp.Application.Features.Auth.Commands;
 using RehApp.Application.Features.Token.Commands;
-using RehApp.Application.Features.User.Commands;
 using RehApp.Application.Features.User.Queries;
 using RehApp.Infrastructure.Common.Enums;
 using RehApp.Infrastructure.Common.Models;
@@ -21,58 +19,6 @@ public class SecurityController : Controller
     public SecurityController(IMediator mediator)
     {
         this.mediator = mediator;
-    }
-
-    /// <summary>
-    /// Cookie-based authentication
-    /// </summary>
-    /// <param name="request"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    [HttpPost]
-    [Route("cookie/signIn")]
-    public async Task<IActionResult> SignIn(
-        [FromBody] SignInRequest request,
-        CancellationToken cancellationToken)
-    {
-        var response = await mediator.Send(request, cancellationToken);
-        return response.IsSuccess ? Ok() : BadRequest(new FailureResponse(response));
-    }
-
-    /// <summary>
-    /// Cookie-based authentication via an external provider. 
-    /// WARNING: Calling this method does not work via swagger
-    /// </summary>
-    /// <param name="scheme">
-    /// The case-sensitive name of the external provider. Currently available:
-    /// <ul><li>Yandex</li><li>Vkontakte</li></ul>
-    /// </param>
-    /// <param name="callback">
-    /// The absolute path to which redirection will be made in case of successful login to the account.
-    /// </param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    [HttpGet("cookie/signIn/{scheme}")]
-    public async Task<IActionResult> SignInViaCookieUsingExternalProvider(
-        [FromRoute] string scheme,
-        [FromQuery] string callback,
-        CancellationToken cancellationToken)
-    {
-        return await SignInUsingExternalProvider(scheme, callback, AuthMethod.Cookie, cancellationToken);
-    }
-
-    /// <summary>
-    /// Sign out of the current user's account
-    /// </summary>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    [HttpPost]
-    [Authorize]
-    [Route("cookie/signOut")]
-    public async Task<IActionResult> SignOut(CancellationToken cancellationToken)
-    {
-        var response = await mediator.Send(new SignOutRequest(), cancellationToken);
-        return response.IsSuccess ? Ok() : BadRequest(new FailureResponse(response));
     }
 
     /// <summary>
@@ -149,15 +95,17 @@ public class SecurityController : Controller
     {
         if (!string.IsNullOrEmpty(remoteError)) return BadRequest(new FailureResponse(remoteError));
 
-        var existRequest = new CheckUserExistenceByExternalLoginInfoRequest();
+        var externalUserDataRequest = new GetUserDataFromExternalProviderRequest();
+        var externalUser = await mediator.Send(externalUserDataRequest, cancellationToken);
+        if (!externalUser.IsSuccess) return BadRequest(new FailureResponse(externalUser));
+
+        var existRequest = new CheckUserExistByLoginRequest() { Login = externalUser.Data!.Username };
         var existResponse = await mediator.Send(existRequest, cancellationToken);
         if (!existResponse.IsSuccess) return BadRequest(new FailureResponse(existResponse));
-
         if (!existResponse.Data)
         {
-            var createUserRequest = new CreateUserByExternalLoginInfoRequest();
-            var createUserResponse = await mediator.Send(createUserRequest, cancellationToken);
-            if (!createUserResponse.IsSuccess) return BadRequest(new FailureResponse(createUserResponse));
+            var message = "User registration required";
+            return BadRequest(new FailureResponse(message, externalUser.Data));
         }
 
         var request = new SignInUsingExternalProviderRequest() { Callback = callback, AuthMethod = authMethod };

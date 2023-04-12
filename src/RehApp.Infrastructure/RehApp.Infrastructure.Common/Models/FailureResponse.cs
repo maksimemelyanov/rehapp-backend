@@ -3,13 +3,15 @@
 public class FailureResponse
 {
     public string Message { get; } = null!;
+    public object? Data { get; }
 
-    public FailureResponse(string message)
+    public FailureResponse(string message, object? data = null)
     {
         Message = message;
+        Data = data;
     }
 
-    public FailureResponse(InternalResponse internalResponse)
+    public FailureResponse(InternalResponse internalResponse, object? data = null)
     {
         if (internalResponse is null)
         {
@@ -22,5 +24,6 @@ public class FailureResponse
         }
 
         Message = internalResponse!.Exception!.Message;
+        Data = data;
     }
 }
