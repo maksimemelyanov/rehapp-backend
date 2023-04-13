@@ -19,6 +19,12 @@ public class AccountController : Controller
         this.mediator = mediator;
     }
 
+    /// <summary>
+    /// Send an email to the user for password recovery
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [HttpPost]
     [AllowAnonymous]
     [Route("reset-password/send-mail")]
@@ -30,6 +36,12 @@ public class AccountController : Controller
         return response.IsSuccess ? Ok(response) : BadRequest(new FailureResponse(response));
     }
 
+    /// <summary>
+    /// Update the user's lost password
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     [HttpPost]
     [AllowAnonymous]
     [Route("reset-password")]

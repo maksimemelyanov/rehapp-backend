@@ -14,9 +14,11 @@ namespace RehApp.Application.Features.Account.Commands;
 public class SendPasswordResetMailRequest : IRequest<InternalResponse>
 {
     [Required, EmailAddress]
-
     public string Email { get; set; } = null!;
 
+    /// <summary>
+    /// The link to which the message sent to the user's email will be forwarded
+    /// </summary>
     [Required]
     public string Callback { get; set; } = null!;
 }

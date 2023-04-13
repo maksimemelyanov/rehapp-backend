@@ -7,7 +7,6 @@ using RehApp.Infrastructure.Common.Exceptions;
 using RehApp.Infrastructure.Common.Extensions;
 using RehApp.Infrastructure.Common.Models;
 using System.ComponentModel.DataAnnotations;
-using System.Web;
 
 namespace RehApp.Application.Features.Account.Commands;
 
@@ -16,6 +15,9 @@ public class SetPasswordRequest : IRequest<InternalResponse>
     [Required]
     public Guid UserId { get; set; }
 
+    /// <summary>
+    /// The token generated when sending an email to the user
+    /// </summary>
     [Required]
     public string Token { get; set; } = null!;
 
