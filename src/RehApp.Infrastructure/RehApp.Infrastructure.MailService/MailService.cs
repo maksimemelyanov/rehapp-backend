@@ -39,7 +39,7 @@ public class MailService : IMailService
         using var smtp = new SmtpClient();
 
         await smtp.ConnectAsync(settings.Host, settings.Port, settings.SecureSocketOptions, cancellationToken);
-        await smtp.AuthenticateAsync(settings.Login, settings.Password, cancellationToken);
+        await smtp.AuthenticateAsync(settings.Login, settings.ExternalPassword, cancellationToken);
         await smtp.SendAsync(message, cancellationToken);
         await smtp.DisconnectAsync(true, cancellationToken);
     }

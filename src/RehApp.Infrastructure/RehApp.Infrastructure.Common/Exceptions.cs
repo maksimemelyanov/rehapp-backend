@@ -8,4 +8,5 @@ public static class Exceptions
     public static ArgumentException RefreshTokenExpired => new("Refresh token expired.");
     public static InvalidDataException FailedToGetUserData => new("User data could not be retrieved.");
     public static InvalidOperationException FailedToSignIn => new("Error when trying to sign in");
+    public static InvalidOperationException UnconfirmedMailbox => new("User's mailbox is not confirmed");
 }

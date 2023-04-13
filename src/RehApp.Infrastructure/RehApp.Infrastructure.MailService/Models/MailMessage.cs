@@ -1,4 +1,5 @@
 ﻿using MimeKit.Text;
+using RehApp.Infrastructure.MailService.Constants;
 using RehApp.Infrastructure.MailService.Extensions;
 
 namespace RehApp.Infrastructure.MailService.Models;
@@ -31,5 +32,13 @@ public class MailMessage
         Subject = subject;
         TextFormat = textFormat;
         Body = body;
+    }
+
+    public static MailMessage ResetPassword(string recipient, string confirmationLink)
+    {
+        return new(recipient,
+            EmailSubjects.PasswordReset,
+            EmailTemplates.PasswordResetTemplate(confirmationLink),
+            TextFormat.Html);
     }
 }

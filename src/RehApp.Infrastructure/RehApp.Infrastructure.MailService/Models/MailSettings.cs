@@ -11,6 +11,7 @@ public class MailSettings
 
     public string Login { get; set; } = null!;
     public string Password { get; set; } = null!;
+    public string ExternalPassword { get; set; } = null!;
 
     public MailSettings(SecureSocketOptions secureSocketOptions = SecureSocketOptions.Auto)
     {
