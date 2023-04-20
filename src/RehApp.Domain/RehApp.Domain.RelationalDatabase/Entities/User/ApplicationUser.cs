@@ -5,6 +5,8 @@ namespace RehApp.Domain.RelationalDatabase.Entities;
 
 public class ApplicationUser : IdentityUser<Guid>, IIdentified
 {
+    public string AvatarUrl { get; set; } = null!;
+
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
     

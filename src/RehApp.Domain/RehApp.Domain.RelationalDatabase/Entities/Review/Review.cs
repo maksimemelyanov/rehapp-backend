@@ -6,6 +6,8 @@ public class Review : IIdentified
 {
     public Guid Id { get; set; }
 
+    public DateTime Date { get; set; }
+
     public Guid AuthorId { get; set; }
     public ApplicationUser Author { get; set; } = null!;
 
@@ -13,4 +15,5 @@ public class Review : IIdentified
     public ApplicationUser Specialist { get; set; } = null!;
 
     public double Evaluation { get; set; }
+    public string? Text { get; set; }
 }
