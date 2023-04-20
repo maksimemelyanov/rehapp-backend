@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using RehApp.Application.DTOs;
+using RehApp.Data.Common.DTOs;
 using RehApp.Domain.RelationalDatabase.Entities;
 using RehApp.Domain.RelationalDatabase.Enums;
 using RehApp.Infrastructure.Common.Exceptions;

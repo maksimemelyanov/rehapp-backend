@@ -13,7 +13,8 @@ public class DependencyContainerDefinition : AppDefinition
 {
     public override void ConfigureServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddRepositories(Assembly.GetAssembly(typeof(ApplicationDbContext))!);
+        services.AddRepositories(Assembly.GetAssembly(typeof(DescriptionTypeConst))!);
+        services.AddTranslators(Assembly.GetAssembly(typeof(ApplicationDbContext))!);
 
         services.AddSingleton(configuration);
 

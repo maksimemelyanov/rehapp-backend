@@ -1,6 +1,6 @@
 ﻿using RehApp.Infrastructure.Common.Interfaces;
 
-namespace RehApp.Application.DTOs;
+namespace RehApp.Data.Common.DTOs;
 
 public class ExternalUserDTO : IDTO
 {

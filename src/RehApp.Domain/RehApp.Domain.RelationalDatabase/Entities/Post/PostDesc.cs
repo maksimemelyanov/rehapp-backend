@@ -1,13 +1,14 @@
-﻿using RehApp.Infrastructure.Common.Interfaces;
+﻿using RehApp.Domain.RelationalDatabase.Abstractions;
+using RehApp.Infrastructure.Common.Interfaces;
 
 namespace RehApp.Domain.RelationalDatabase.Entities;
 
-public class PostDesc : IIdentified, IDescription
+public class PostDesc : IIdentified, IDescriptionEntity
 {
     public Guid Id { get; set; }
 
-    public Guid PostId { get; set; }
-    public virtual Post Post { get; set; } = null!;
+    public Guid ParentId { get; set; }
+    public virtual Post Parent { get; set; } = null!;
 
     public Guid DescriptionTypeId { get; set; }
     public virtual DescriptionType DescriptionType { get; set; } = null!;

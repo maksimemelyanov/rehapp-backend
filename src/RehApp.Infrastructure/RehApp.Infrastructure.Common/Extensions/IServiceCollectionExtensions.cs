@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using RehApp.Infrastructure.Common.Interfaces;
 using RehApp.Infrastructure.Common.Repository;
 using System.Reflection;
 
@@ -10,6 +11,8 @@ public static class IServiceCollectionExtensions
 
     private static string IRepositoryName => typeof(IRepository<>).Name;
     private static string RepositoryName => typeof(Repository<>).Name;
+
+    private static string ITranslatorName => typeof(ITranslator<,>).Name;
 
     #endregion
 
@@ -32,6 +35,25 @@ public static class IServiceCollectionExtensions
 
             //adding to dependency injection container
             services.AddScoped(contract, repository);
+        }
+
+        return services;
+    }
+
+    public static IServiceCollection AddTranslators(this IServiceCollection services, Assembly assembly)
+    {
+        //getting all translators
+        var translators = assembly.GetTypes()
+            .Where(type => type?.GetInterface(ITranslatorName) is not null && !type.IsAbstract)
+            .ToList();
+
+        foreach (var translator in translators)
+        {
+            //getting the translator interface
+            var contract = translator.GetInterface(ITranslatorName);
+
+            //adding to dependency injection container
+            services.AddScoped(contract!, translator);
         }
 
         return services;

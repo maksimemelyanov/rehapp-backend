@@ -1,13 +1,14 @@
-﻿using RehApp.Infrastructure.Common.Interfaces;
+﻿using RehApp.Domain.RelationalDatabase.Abstractions;
+using RehApp.Infrastructure.Common.Interfaces;
 
 namespace RehApp.Domain.RelationalDatabase.Entities;
 
-public class ApplicationUserDesc : IIdentified, IDescription
+public class ApplicationUserDesc : IIdentified, IDescriptionEntity
 {
     public Guid Id { get; set; }
 
-    public Guid ApplicationUserId { get; set; }
-    public virtual ApplicationUser ApplicationUser { get; set; } = null!;
+    public Guid ParentId { get; set; }
+    public virtual ApplicationUser Parent { get; set; } = null!;
 
     public Guid DescriptionTypeId { get; set; }
     public virtual DescriptionType DescriptionType { get; set; } = null!;

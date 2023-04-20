@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RehApp.Infrastructure.Commo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RehApp.Infrastructure.MailService", "RehApp.Infrastructure\RehApp.Infrastructure.MailService\RehApp.Infrastructure.MailService.csproj", "{D27C3700-DFBB-4836-88AF-D968E80C1138}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RehApp.Data.Common", "RehApp.Data.Common\RehApp.Data.Common.csproj", "{8A39D357-9714-408C-B66A-AACBA789505A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{D27C3700-DFBB-4836-88AF-D968E80C1138}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D27C3700-DFBB-4836-88AF-D968E80C1138}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D27C3700-DFBB-4836-88AF-D968E80C1138}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A39D357-9714-408C-B66A-AACBA789505A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A39D357-9714-408C-B66A-AACBA789505A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A39D357-9714-408C-B66A-AACBA789505A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A39D357-9714-408C-B66A-AACBA789505A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{A5106D4C-8979-4D64-B6E9-D49B036E8A3C} = {BF51D2FD-7BC9-45FF-9AA6-9C42E44B92FE}
 		{8472F2C0-6014-4766-B46F-3192A8D48E8A} = {D96EE729-404B-41DA-A3F2-DC2CC20D0979}
 		{D27C3700-DFBB-4836-88AF-D968E80C1138} = {D96EE729-404B-41DA-A3F2-DC2CC20D0979}
+		{8A39D357-9714-408C-B66A-AACBA789505A} = {F08F27A1-117E-4C79-9DB2-AEFA027AFDB4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6FD81415-BEBD-4306-A770-7AAA6AE2FA1E}

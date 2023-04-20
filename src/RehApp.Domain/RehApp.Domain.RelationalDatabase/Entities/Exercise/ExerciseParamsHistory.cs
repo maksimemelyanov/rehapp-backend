@@ -1,8 +1,9 @@
-﻿using RehApp.Infrastructure.Common.Interfaces;
+﻿using RehApp.Domain.RelationalDatabase.Abstractions;
+using RehApp.Infrastructure.Common.Interfaces;
 
 namespace RehApp.Domain.RelationalDatabase.Entities;
 
-public class ExerciseParamsHistory : IIdentified, IHistory
+public class ExerciseParamsHistory : IIdentified, IHistoryEntity
 {
     public Guid Id { get; set; }
 

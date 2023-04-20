@@ -1,13 +1,14 @@
-﻿using RehApp.Infrastructure.Common.Interfaces;
+﻿using RehApp.Domain.RelationalDatabase.Abstractions;
+using RehApp.Infrastructure.Common.Interfaces;
 
 namespace RehApp.Domain.RelationalDatabase.Entities;
 
-public class DiaryDesc : IIdentified, IDescription
+public class DiaryDesc : IIdentified, IDescriptionEntity
 {
     public Guid Id { get; set; }
 
-    public Guid DiaryId { get; set; }
-    public virtual Diary Diary { get; set; } = null!;
+    public Guid ParentId { get; set; }
+    public virtual Diary Parent { get; set; } = null!;
 
     public Guid DescriptionTypeId { get; set; }
     public virtual DescriptionType DescriptionType { get; set; } = null!;

@@ -1,13 +1,14 @@
-﻿using RehApp.Infrastructure.Common.Interfaces;
+﻿using RehApp.Domain.RelationalDatabase.Abstractions;
+using RehApp.Infrastructure.Common.Interfaces;
 
 namespace RehApp.Domain.RelationalDatabase.Entities;
 
-public class ReviewDesc : IIdentified, IDescription
+public class ReviewDesc : IIdentified, IDescriptionEntity
 {
     public Guid Id { get; set; }
 
-    public Guid ReviewId { get; set; }
-    public virtual Review Review { get; set; } = null!;
+    public Guid ParentId { get; set; }
+    public virtual Review Parent { get; set; } = null!;
 
     public Guid DescriptionTypeId { get; set; }
     public virtual DescriptionType DescriptionType { get; set; } = null!;

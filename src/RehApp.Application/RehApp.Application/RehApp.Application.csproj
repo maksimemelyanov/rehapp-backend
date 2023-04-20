@@ -42,6 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\RehApp.Data.Common\RehApp.Data.Common.csproj" />
     <ProjectReference Include="..\..\RehApp.Data\RehApp.Data.EntityFrameworkCore\RehApp.Data.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\RehApp.Domain\RehApp.Domain.RelationalDatabase\RehApp.Domain.RelationalDatabase.csproj" />
     <ProjectReference Include="..\..\RehApp.Infrastructure\RehApp.Infrastructure.Common\RehApp.Infrastructure.Common.csproj" />
