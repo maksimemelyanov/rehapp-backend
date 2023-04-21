@@ -7,6 +7,8 @@ public class AppealDesc : IIdentified, IDescriptionEntity
 {
     public Guid Id { get; set; }
 
+    public DateTime CreationDate { get; set; }
+
     public Guid ParentId { get; set; }
     public virtual Appeal Parent { get; set; } = null!;
 

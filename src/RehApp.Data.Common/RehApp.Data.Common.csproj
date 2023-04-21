@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RehApp.Domain\RehApp.Domain.RelationalDatabase\RehApp.Domain.RelationalDatabase.csproj" />
     <ProjectReference Include="..\RehApp.Infrastructure\RehApp.Infrastructure.Common\RehApp.Infrastructure.Common.csproj" />
   </ItemGroup>
 

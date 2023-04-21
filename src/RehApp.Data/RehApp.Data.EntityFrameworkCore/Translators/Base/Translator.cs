@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MapsterMapper;
+using Microsoft.EntityFrameworkCore;
 using RehApp.Domain.RelationalDatabase.Abstractions;
 using RehApp.Domain.RelationalDatabase.Entities;
 using RehApp.Infrastructure.Common.Enums;
@@ -12,13 +13,41 @@ public abstract class Translator<Entity, DTO> : ITranslator<Entity, DTO>
     where DTO : IDTO
 {
     protected readonly ApplicationDbContext context;
+    protected readonly IMapper mapper;
 
-    public Translator(ApplicationDbContext context)
+    public Translator(ApplicationDbContext context, IMapper mapper)
     {
         this.context = context;
+        this.mapper = mapper;
     }
 
-    protected async Task<DescriptionValue?> GetDescriptionValue<T>(
+    protected async Task<List<DescriptionValue>> GetDescriptionValues<T>(Guid parentId, long descriptionTypeCode) 
+        where T : class, IDescriptionEntity
+    {
+        var descriptions =  await GetDescriptionValues<AppealDesc>(
+            parentId: parentId,
+            descriptionTypeCode: descriptionTypeCode,
+            filter: null,
+            orderBy: (x) => x.CreationDate,
+            sortingDirection: SortingDirection.Ascending);
+
+        return descriptions;
+    }
+
+    protected async Task<DescriptionValue?> GetDescriptionValue<T>(Guid parentId, long descriptionTypeCode)
+        where T : class, IDescriptionEntity
+    {
+        var description = await GetDescriptionValue<AppealDesc>(
+            parentId: parentId,
+            descriptionTypeCode: descriptionTypeCode,
+            filter: null,
+            orderBy: (x) => x.CreationDate,
+            sortingDirection: SortingDirection.Ascending);
+
+        return description;
+    }
+
+    private async Task<DescriptionValue?> GetDescriptionValue<T>(
         Guid parentId,
         long descriptionTypeCode,
         Expression<Func<T, bool>>? filter = null,
@@ -36,7 +65,7 @@ public abstract class Translator<Entity, DTO> : ITranslator<Entity, DTO>
         return descriptionValues.Count > 1 ? null : descriptionValues.SingleOrDefault();
     }
 
-    protected async Task<List<DescriptionValue>> GetDescriptionValues<T>(
+    private async Task<List<DescriptionValue>> GetDescriptionValues<T>(
         Guid parentId,
         long descriptionTypeCode,
         Expression<Func<T, bool>>? filter = null,

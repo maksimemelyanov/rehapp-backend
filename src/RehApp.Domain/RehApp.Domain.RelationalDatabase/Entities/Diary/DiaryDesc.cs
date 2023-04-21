@@ -7,6 +7,8 @@ public class DiaryDesc : IIdentified, IDescriptionEntity
 {
     public Guid Id { get; set; }
 
+    public DateTime CreationDate { get; set; }
+
     public Guid ParentId { get; set; }
     public virtual Diary Parent { get; set; } = null!;
 

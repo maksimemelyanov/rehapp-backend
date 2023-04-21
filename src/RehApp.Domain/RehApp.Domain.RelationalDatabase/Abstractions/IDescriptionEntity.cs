@@ -6,6 +6,8 @@ public interface IDescriptionEntity
 {
     public Guid ParentId { get; set; }
 
+    public DateTime CreationDate { get; set; }
+
     public Guid DescriptionTypeId { get; set; }
     public DescriptionType DescriptionType { get; set; }
 

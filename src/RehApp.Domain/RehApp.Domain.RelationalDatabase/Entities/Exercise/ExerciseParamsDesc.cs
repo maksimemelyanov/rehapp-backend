@@ -7,6 +7,8 @@ public class ExerciseParamsDesc : IIdentified, IDescriptionEntity
 {
     public Guid Id { get; set; }
 
+    public DateTime CreationDate { get; set; }
+
     public Guid ParentId { get; set; }
     public virtual ExerciseParams Parent { get; set; } = null!;
 
